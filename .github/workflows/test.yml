@@ -1,12 +1,6 @@
 name: Test
 
-on:
-  push:
-  pull_request:
-  schedule:
-    # Run weekly on Saturday
-    - cron: '37 3 * * SAT'
-
+on: push
 jobs:
   mysql:
     runs-on: ubuntu-latest
@@ -47,8 +41,8 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ${{ steps.pip-cache.outputs.dir }}
-        key:
-          ${{ matrix.python-version }}-v1-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/tox.ini') }}
+        key: ${{ matrix.python-version }}-v1-${{ hashFiles('**/pyproject.toml') }}-${{
+          hashFiles('**/tox.ini') }}
         restore-keys: |
           ${{ matrix.python-version }}-v1-
 
@@ -78,20 +72,19 @@ jobs:
         database: [postgresql, postgis]
         # Add psycopg3 to our matrix for modern python versions
         include:
-            - python-version: '3.10'
-              database: psycopg3
-            - python-version: '3.11'
-              database: psycopg3
-            - python-version: '3.12'
-              database: psycopg3
-            - python-version: '3.13'
-              database: psycopg3
-            - python-version: '3.13'
-              database: postgis3
-            - python-version: '3.13'
-              database: postgresql
-              env:
-                DJANGO_SELENIUM_TESTS=true
+        - python-version: '3.10'
+          database: psycopg3
+        - python-version: '3.11'
+          database: psycopg3
+        - python-version: '3.12'
+          database: psycopg3
+        - python-version: '3.13'
+          database: psycopg3
+        - python-version: '3.13'
+          database: postgis3
+        - python-version: '3.13'
+          database: postgresql
+          env: DJANGO_SELENIUM_TESTS=true
 
     services:
       postgres:
@@ -126,8 +119,8 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ${{ steps.pip-cache.outputs.dir }}
-        key:
-          ${{ matrix.python-version }}-v1-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/tox.ini') }}
+        key: ${{ matrix.python-version }}-v1-${{ hashFiles('**/pyproject.toml') }}-${{
+          hashFiles('**/tox.ini') }}
         restore-keys: |
           ${{ matrix.python-version }}-v1-
 
@@ -175,8 +168,8 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ${{ steps.pip-cache.outputs.dir }}
-        key:
-          ${{ matrix.python-version }}-v1-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/tox.ini') }}
+        key: ${{ matrix.python-version }}-v1-${{ hashFiles('**/pyproject.toml') }}-${{
+          hashFiles('**/tox.ini') }}
         restore-keys: |
           ${{ matrix.python-version }}-v1-
 
@@ -189,7 +182,7 @@ jobs:
       run: tox
       env:
         DB_BACKEND: sqlite3
-        DB_NAME: ":memory:"
+        DB_NAME: ':memory:'
 
   lint:
     runs-on: ubuntu-latest
@@ -213,8 +206,8 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ${{ steps.pip-cache.outputs.dir }}
-        key:
-          ${{ matrix.python-version }}-v1-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/tox.ini') }}
+        key: ${{ matrix.python-version }}-v1-${{ hashFiles('**/pyproject.toml') }}-${{
+          hashFiles('**/tox.ini') }}
         restore-keys: |
           ${{ matrix.python-version }}-v1-
 
